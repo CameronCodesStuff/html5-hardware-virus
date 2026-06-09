@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-File Downloader</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 450px;
+            text-align: center;
+        }
+        h1 {
+            color: #1a73e8;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        p {
+            line-height: 1.5;
+            color: #5f6368;
+        }
+        .instructions {
+            background-color: #fcf8e3;
+            border-left: 4px solid #f0ad4e;
+            color: #8a6d3b;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #1557b0;
+        }
+        .footer-note {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #9aa0a6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Multiple File Downloader</h1>
+    <p>Clicking the button below will attempt to download multiple sample text files at the same time.</p>
+    
+    <div class="instructions">
+        <strong>⚠️ Browser Notice:</strong><br>
+        If the downloads don't start, look at your browser's address bar. You must click <strong>"Allow pop-ups and automatic downloads"</strong> for this site.
+    </div>
+
+    <button class="btn" id="downloadBtn">Download All Files</button>
+    
+    <p class="footer-note">Note: This creates mock text files directly in your browser for demonstration purposes.</p>
+</div>
+
+<script>
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+        const files = [
+            { name: 'Document_1.txt', content: 'This is the content of the first file.' },
+            { name: 'Document_2.txt', content: 'This is the content of the second file.' },
+            { name: 'Document_3.txt', content: 'This is the content of the third file.' }
+        ];
+
+        files.forEach((file, index) => {
+            setTimeout(() => {
+                const blob = new Blob([file.content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file.name;
+                
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                URL.revokeObjectURL(url);
+            }, index * 250); 
+        });
+    });
+</script>
+
+</body>
+</html>
